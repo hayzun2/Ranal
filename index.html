@@ -3,83 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Hacker - c00lkidd Style</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #000;
-            color: #0F0;
-            overflow: hidden;
-        }
-        header {
-            text-align: center;
-            padding: 20px;
-            border-bottom: 2px solid #0F0;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        nav a {
-            color: #0F0;
-            text-decoration: none;
-            font-size: 1.2em;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #FFF;
-        }
-        .content {
-            padding: 20px;
-            text-align: center;
-            height: 60vh;
-        }
-        .hidden {
-            display: none;
-        }
-        footer {
-            text-align: center;
-            border-top: 2px solid #0F0;
-            padding: 10px;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    <title>Inscription</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center min-h-screen relative">
+    
+    <!-- Bannière publicitaire en haut -->
+    <div class="w-full text-center py-2 bg-gray-800 mb-4">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXX"
+             data-ad-slot="YYYYYYY"
+             data-ad-format="auto"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <div class="w-96 p-6 bg-gray-800 rounded-lg shadow-md text-center" id="signupForm">
+        <h2 class="text-2xl font-bold mb-4">Inscription</h2>
+        <input type="text" id="username" placeholder="Nom d'utilisateur" class="w-full p-2 mb-3 border border-gray-600 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+        <input type="email" id="email" placeholder="Email" class="w-full p-2 mb-3 border border-gray-600 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+        <input type="password" id="password" placeholder="Mot de passe" class="w-full p-2 mb-3 border border-gray-600 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+        <button onclick="register()" class="w-full p-2 bg-red-600 hover:bg-red-700 rounded text-white font-bold">S'inscrire</button>
+        
+        <!-- Pub sous le formulaire -->
+        <div class="mt-4">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXX"
+                 data-ad-slot="YYYYYYY"
+                 data-ad-format="auto"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+    
+    <div id="welcome" class="hidden text-center">
+        <h2 class="text-2xl font-bold">Bienvenue, <span id="userDisplay"></span></h2>
+        <p class="mt-2">Votre clé sera générée dans <span id="timer" class="font-bold">30</span> secondes.</p>
+        <p id="codeDisplay" class="mt-4 text-xl font-bold text-green-400"></p>
+    </div>
+    
+    <!-- Sidebar publicité flottante -->
+    <div class="fixed top-1/4 right-2 w-60 bg-gray-800 p-4 rounded-lg shadow-lg hidden lg:block">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXX"
+             data-ad-slot="YYYYYYY"
+             data-ad-format="auto"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
     <script>
-        function showPage(pageId) {
-            const pages = document.querySelectorAll('.content');
-            pages.forEach(page => page.classList.add('hidden'));
-            document.getElementById(pageId).classList.remove('hidden');
+        function register() {
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!username || !email || !password) {
+                alert("Veuillez remplir tous les champs.");
+                return;
+            }
+            
+            document.getElementById('userDisplay').innerText = username;
+            document.getElementById('signupForm').classList.add('hidden');
+            document.getElementById('welcome').classList.remove('hidden');
+            
+            let countdown = 30;
+            const timer = setInterval(() => {
+                countdown--;
+                document.getElementById('timer').innerText = countdown;
+                if (countdown === 0) {
+                    clearInterval(timer);
+                    document.getElementById('codeDisplay').innerText = 'Votre code est : ' + Math.floor(100000 + Math.random() * 900000);
+                }
+            }, 1000);
+            
+            // Affichage d'une pub interstitielle après inscription
+            setTimeout(() => {
+                alert("Regarde cette annonce pour continuer !");
+            }, 1000);
         }
     </script>
-</head>
-<body>
-    <header>
-        <h1>Bienvenue sur le Site Hacker c00lkidd</h1>
-    </header>
-    <nav>
-        <a href="#" onclick="showPage('home')">Accueil</a>
-        <a href="#" onclick="showPage('about')">À Propos</a>
-        <a href="#" onclick="showPage('contact')">Contact</a>
-    </nav>
-    <div id="home" class="content">
-        <h2>Page d'Accueil</h2>
-        <p>Bienvenue sur la page principale. Préparez-vous à explorer.</p>
-    </div>
-    <div id="about" class="content hidden">
-        <h2>À Propos</h2>
-        <p>Ce site est inspiré par le thème hacker légendaire c00lkidd.</p>
-    </div>
-    <div id="contact" class="content hidden">
-        <h2>Contact</h2>
-        <p>Contactez-nous à l'adresse : <a href="mailto:hack@c00lkidd.com">hack@c00lkidd.com</a></p>
-    </div>
-    <footer>
-        <p>&copy; 2024 - Site Hacker Thème c00lkidd</p>
-    </footer>
 </body>
 </html>
