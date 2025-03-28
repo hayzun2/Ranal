@@ -61,6 +61,7 @@
     </div>
     
     <script>
+        // Fonction d'enregistrement
         function register() {
             const username = document.getElementById('username').value.trim();
             const email = document.getElementById('email').value.trim();
@@ -71,6 +72,12 @@
                 return;
             }
             
+            // Sauvegarde dans le localStorage pour maintenir la session
+            localStorage.setItem("username", username);
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
+            
+            // Affiche le message de bienvenue
             document.getElementById('userDisplay').innerText = username;
             document.getElementById('signupForm').classList.add('hidden');
             document.getElementById('welcome').classList.remove('hidden');
@@ -84,12 +91,22 @@
                     document.getElementById('codeDisplay').innerText = 'Votre code est : ' + Math.floor(100000 + Math.random() * 900000);
                 }
             }, 1000);
-            
+
             // Affichage d'une pub interstitielle après inscription
             setTimeout(() => {
                 alert("Regarde cette annonce pour continuer !");
             }, 1000);
         }
+
+        // Vérifie si l'utilisateur est déjà connecté (depuis le localStorage)
+        window.onload = function() {
+            const storedUsername = localStorage.getItem("username");
+            if (storedUsername) {
+                document.getElementById('userDisplay').innerText = storedUsername;
+                document.getElementById('signupForm').classList.add('hidden');
+                document.getElementById('welcome').classList.remove('hidden');
+            }
+        };
     </script>
 </body>
 </html>
