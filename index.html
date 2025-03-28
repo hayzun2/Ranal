@@ -42,16 +42,15 @@
         </div>
     </div>
     
+    <!-- Ajout du bouton pour télécharger depuis Mega -->
+    <div class="mt-4">
+        <button onclick="downloadFile()" class="w-full p-2 bg-blue-600 hover:bg-blue-700 rounded text-white font-bold">Télécharger le fichier</button>
+    </div>
+    
     <div id="welcome" class="hidden text-center">
         <h2 class="text-2xl font-bold">Bienvenue, <span id="userDisplay"></span></h2>
-        <p class="mt-2">Vous pouvez maintenant télécharger votre fichier.</p>
-        
-        <!-- Le bouton de téléchargement -->
-        <a href="https://www.dropbox.com/s/qwwEzyUDgHgR3LqY?dl=1" download="RanalFile.zip">
-            <button class="w-full p-2 bg-blue-600 hover:bg-blue-700 rounded text-white font-bold mt-4">
-                Télécharger le fichier
-            </button>
-        </a>
+        <p class="mt-2">Votre clé sera générée dans <span id="timer" class="font-bold">30</span> secondes.</p>
+        <p id="codeDisplay" class="mt-4 text-xl font-bold text-green-400"></p>
     </div>
     
     <!-- Sidebar publicité flottante -->
@@ -87,6 +86,16 @@
             document.getElementById('userDisplay').innerText = username;
             document.getElementById('signupForm').classList.add('hidden');
             document.getElementById('welcome').classList.remove('hidden');
+            
+            let countdown = 30;
+            const timer = setInterval(() => {
+                countdown--;
+                document.getElementById('timer').innerText = countdown;
+                if (countdown === 0) {
+                    clearInterval(timer);
+                    document.getElementById('codeDisplay').innerText = 'Votre code est : ' + Math.floor(100000 + Math.random() * 900000);
+                }
+            }, 1000);
 
             // Affichage d'une pub interstitielle après inscription
             setTimeout(() => {
@@ -103,6 +112,11 @@
                 document.getElementById('welcome').classList.remove('hidden');
             }
         };
+
+        // Fonction pour télécharger le fichier Mega
+        function downloadFile() {
+            window.open("https://mega.nz/file/r5Il1LaT#cGduSGB77ryRib5mwmOhPkaVtnZTulXdgtKwmg704GM", "_blank");
+        }
     </script>
 </body>
 </html>
