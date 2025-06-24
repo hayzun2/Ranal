@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recrutement - Ranal</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background-image: url('logo_Ranal_basic.png'); /* Remplace par le bon chemin */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Conteneur principal avec scroll interne */
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.75);
+      width: 90%;
+      max-width: 500px;
+      height: 80%;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      padding: 40px 30px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto; /* Scroll vertical si trop long */
+      scrollbar-width: thin;
+    }
+
+    /* Scrollbar fine pour Chrome et Edge */
+    .overlay::-webkit-scrollbar {
+      width: 6px;
+    }
+    .overlay::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+    }
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-size: 2em;
+      border-bottom: 2px solid white;
+      padding-bottom: 10px;
+      flex-shrink: 0;
+    }
+
+    p {
+      margin: 20px 0 0 0;
+      text-align: justify;
+      font-size: 1.1em;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    /* Bouton menu en haut à droite */
+    #menuButton {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      font-size: 24px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+
+    /* Menu latéral déroulant */
+    #sideMenu {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      height: 100%;
+      width: 250px;
+      background-color: rgba(0, 0, 0, 0.95);
+      display: flex;
+      flex-direction: column;
+      padding-top: 60px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+    }
+    #sideMenu.open {
+      right: 0;
+    }
+
+    #sideMenu a {
+      color: white;
+      text-decoration: none;
+      padding: 15px 20px;
+      font-size: 1.2em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    #sideMenu a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .overlay {
+        padding: 20px;
+        height: auto;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+      p {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bouton menu -->
+  <button id="menuButton">☰</button>
+
+  <!-- Menu déroulant -->
+  <nav id="sideMenu" aria-label="Menu de navigation">
+    <a href="https://ranal.com/menu">Menu</a>
+    <a href="https://ranal.com/recrutement">Recrutement</a>
+    <a href="https://discord.gg/tonliendiscord">Discord</a>
+  </nav>
+
+  <!-- Contenu principal -->
+  <main class="overlay" role="main">
+    <h1>Recrutement - Ranal</h1>
+    <p>
+      Ranal recrute actuellement des développeurs expérimentés pour renforcer son équipe. Les critères sont stricts : seuls les candidats âgés de <strong>18 ans ou plus</strong> seront considérés. Vous devez avoir une solide expérience en <strong>C++</strong>, notamment dans la <strong>création et l’injection de DLL</strong>.<br><br>
+      Pour postuler, vous devez envoyer votre <strong>CV</strong>, une <strong>lettre de motivation</strong> et une <strong>photo de votre pièce d'identité</strong> à l'adresse suivante :<br><br>
+      <strong>teamcoolkiddreborn@gmail.com</strong><br><br>
+      Le salaire n’est <strong>pas calculé en fonction des tâches réalisées</strong>, mais dépend du <strong>nombre d'utilisateurs actifs de l’application chaque semaine</strong>. Notre modèle économique repose sur les publicités présentes dans le système de clés d’accès.<br><br>
+      Le <strong>seul jour de travail requis est le mercredi</strong>, vous permettant une grande flexibilité tout en contribuant à l'évolution de notre outil.<br><br>
+      Rejoignez-nous si vous êtes passionné, sérieux, et prêt à travailler dans un projet ambitieux lié à l’injection de scripts dans des environnements comme <strong>Roblox, FiveM, Minecraft</strong> et d’autres.
+    </p>
+  </main>
+
+  <script>
+    const menuBtn = document.getElementById("menuButton");
+    const sideMenu = document.getElementById("sideMenu");
+
+    menuBtn.addEventListener("click", () => {
+      sideMenu.classList.toggle("open");
+    });
+
+    // Fermer le menu quand on clique sur un lien (optionnel)
+    sideMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        sideMenu.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
