@@ -1,123 +1,149 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-adsense-account" content="ca-pub-2786714570723053">
-    <title>Inscription</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2786714570723053" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ranal home</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background-image: url('logo_Ranal_basic.png'); /* Remplace par le bon chemin */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Contenu principal */
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.75);
+      width: 90%;
+      max-width: 500px;
+      height: 80%;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      padding: 40px 30px;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-size: 2em;
+      border-bottom: 2px solid white;
+      padding-bottom: 10px;
+    }
+
+    p {
+      margin: 0;
+      text-align: justify;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    /* Bouton menu */
+    #menuButton {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      font-size: 24px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+
+    /* Menu latéral */
+    #sideMenu {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      height: 100%;
+      width: 250px;
+      background-color: rgba(0, 0, 0, 0.95);
+      display: flex;
+      flex-direction: column;
+      padding-top: 60px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+    }
+
+    #sideMenu.open {
+      right: 0;
+    }
+
+    #sideMenu a {
+      color: white;
+      text-decoration: none;
+      padding: 15px 20px;
+      font-size: 1.2em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    #sideMenu a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 600px) {
+      .overlay {
+        padding: 20px;
+        height: auto;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white flex flex-col items-center min-h-screen relative">
-    
-    <!-- Bannière publicitaire en haut -->
-    <div class="w-full text-center py-2 bg-gray-800 mb-4">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2786714570723053"
-             data-ad-slot="YYYYYYY"
-             data-ad-format="auto"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-    
-    <div class="w-96 p-6 bg-gray-800 rounded-lg shadow-md text-center" id="signupForm">
-        <h2 class="text-2xl font-bold mb-4">Inscription</h2>
-        <input type="text" id="username" placeholder="Nom d'utilisateur" class="w-full p-2 mb-3 border border-gray-600 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-        <input type="email" id="email" placeholder="Email" class="w-full p-2 mb-3 border border-gray-600 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-        <input type="password" id="password" placeholder="Mot de passe" class="w-full p-2 mb-3 border border-gray-600 rounded bg-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-        <button onclick="register()" class="w-full p-2 bg-red-600 hover:bg-red-700 rounded text-white font-bold">S'inscrire</button>
-        
-        <!-- Pub sous le formulaire -->
-        <div class="mt-4">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-2786714570723053"
-                 data-ad-slot="YYYYYYY"
-                 data-ad-format="auto"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    </div>
-    
-    <!-- Ajout du bouton pour télécharger depuis Mega -->
-    <div class="mt-4">
-        <button onclick="downloadFile()" class="w-full p-2 bg-blue-600 hover:bg-blue-700 rounded text-white font-bold">Télécharger le fichier</button>
-    </div>
-    
-    <div id="welcome" class="hidden text-center">
-        <h2 class="text-2xl font-bold">Bienvenue, <span id="userDisplay"></span></h2>
-        <p class="mt-2">Votre clé sera générée dans <span id="timer" class="font-bold">30</span> secondes.</p>
-        <p id="codeDisplay" class="mt-4 text-xl font-bold text-green-400"></p>
-    </div>
-    
-    <!-- Sidebar publicité flottante -->
-    <div class="fixed top-1/4 right-2 w-60 bg-gray-800 p-4 rounded-lg shadow-lg hidden lg:block">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2786714570723053"
-             data-ad-slot="YYYYYYY"
-             data-ad-format="auto"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-    
-    <script>
-        // Fonction d'enregistrement
-        function register() {
-            const username = document.getElementById('username').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
+<body>
 
-            if (!username || !email || !password) {
-                alert("Veuillez remplir tous les champs.");
-                return;
-            }
-            
-            // Sauvegarde dans le localStorage pour maintenir la session
-            localStorage.setItem("username", username);
-            localStorage.setItem("email", email);
-            localStorage.setItem("password", password);
-            
-            // Affiche le message de bienvenue
-            document.getElementById('userDisplay').innerText = username;
-            document.getElementById('signupForm').classList.add('hidden');
-            document.getElementById('welcome').classList.remove('hidden');
-            
-            let countdown = 30;
-            const timer = setInterval(() => {
-                countdown--;
-                document.getElementById('timer').innerText = countdown;
-                if (countdown === 0) {
-                    clearInterval(timer);
-                    document.getElementById('codeDisplay').innerText = 'Votre code est : ' + Math.floor(100000 + Math.random() * 900000);
-                }
-            }, 1000);
+  <!-- Bouton menu -->
+  <button id="menuButton">☰</button>
 
-            // Affichage d'une pub interstitielle après inscription
-            setTimeout(() => {
-                alert("Regarde cette annonce pour continuer !");
-            }, 1000);
-        }
+  <!-- Menu déroulant latéral -->
+  <div id="sideMenu">
+    <a href="Ranalexe.html">Menu</a>
+    <a href="file:///C:/Users/Sammito/Desktop/Ranal%20web/recrutement.html">Recrutement</a>
+    <a href="https://discord.gg/c5E4c7WVca">Discord</a>
+  </div>
 
-        // Vérifie si l'utilisateur est déjà connecté (depuis le localStorage)
-        window.onload = function() {
-            const storedUsername = localStorage.getItem("username");
-            if (storedUsername) {
-                document.getElementById('userDisplay').innerText = storedUsername;
-                document.getElementById('signupForm').classList.add('hidden');
-                document.getElementById('welcome').classList.remove('hidden');
-            }
-        };
+  <!-- Contenu principal -->
+  <div class="overlay">
+    <h1>Welcome to Ranal</h1>
+    <p>
+      Ranal est un exécuteur level 8 multi-jeux performant compatible avec plusieurs langages tels que <strong>C++</strong> et <strong>Lua</strong>. Il permet d'exécuter des scripts personnalisés dans des environnements comme <strong>Roblox</strong>, <strong>FiveM (GTA V)</strong>, <strong>Minecraft</strong> (via des mods) et d'autres plateformes. L'utilisation de Ranal est entièrement <strong>gratuite pour Roblox</strong>, avec un système d'injection simple avec clé. En revanche, pour les autres jeux, un <strong>système de clé (key system)</strong> est requis et l'accès est <strong>payant</strong>, afin de garantir un support stable et sécurisé. Ranal offre ainsi une solution complète pour les développeurs ou passionnés souhaitant explorer et modifier le comportement de certains jeux, dans un but éducatif ou expérimental.
+    </p>
+  </div>
 
-        // Fonction pour télécharger le fichier Mega
-        function downloadFile() {
-            // Ouvrir le lien Mega dans un nouvel onglet
-            window.location.href = "https://mega.nz/folder/mgYEAa7Z#484M0Ev-1YU0Iz_29EHQyw";
-        }
-    </script>
+  <!-- Script du menu -->
+  <script>
+    const menuBtn = document.getElementById("menuButton");
+    const sideMenu = document.getElementById("sideMenu");
+
+    menuBtn.addEventListener("click", () => {
+      sideMenu.classList.toggle("open");
+    });
+  </script>
 </body>
 </html>
